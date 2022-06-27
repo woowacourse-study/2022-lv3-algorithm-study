@@ -46,6 +46,6 @@ notion: https://triangular-roarer-cfe.notion.site/223f32172eb6447fa8289f02755c02
 
 ### Git branch Protection Rule
 
-1. `kth990303:main` 브랜치에는 push가 불가능합니다. PR을 보내주고 코드리뷰어들의 `approve`로 승인을 받아야 `kth990303:main`으로 병합됩니다.
+1. `2022-lv3-algorithm-study:main` 브랜치에는 push가 불가능합니다. PR을 보내주고 코드리뷰어들의 `approve`로 승인을 받아야 `2022-lv3-algorithm-study:main`으로 병합됩니다.
 2. 하나의 PR에는 `최소 2개 이상의 approve`가 있어야 합니다.
 3. 지정된 코드리뷰어의 review는 반드시 받아야 합니다.
