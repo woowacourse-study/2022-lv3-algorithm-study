@@ -10,11 +10,6 @@ public class Main {
 
         //알고리즘
         n -= 1;
-        if (n == 0) {
-            System.out.println(1);
-            return;
-        }
-
         int remain = n % 8;
         if (remain < 5) {
             System.out.println(remain + 1);
