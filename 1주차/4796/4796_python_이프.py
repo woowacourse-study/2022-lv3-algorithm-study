@@ -1,6 +1,5 @@
 
 def solution(L, P, V):
-
     if (P > V):
         return L
 
