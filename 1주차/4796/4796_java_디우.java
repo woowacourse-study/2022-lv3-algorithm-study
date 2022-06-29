@@ -6,7 +6,6 @@ import java.util.Arrays;
 class Main {
 
     final static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    final static StringBuilder result = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         int totalCount = 1;
@@ -21,14 +20,10 @@ class Main {
             final int[] inputs = getInputs(input);
             final int possibleDays = calculatePossibleDays(inputs);
 
-            makeOutput(totalCount, possibleDays);
+            System.out.println("Case " + totalCount + ": " + possibleDays);
 
             totalCount++;
         }
-
-        reader.close();
-
-        System.out.println(result);
     }
 
     private static int[] getInputs(String input) {
@@ -43,13 +38,5 @@ class Main {
         final int remainingDays = Math.min(inputs[2] % inputs[1], inputs[0]);
 
         return days + remainingDays;
-    }
-
-    private static void makeOutput(int totalCount, int possibleDays) {
-        result.append("Case ")
-                .append(totalCount)
-                .append(": ")
-                .append(possibleDays)
-                .append("\n");
     }
 }
