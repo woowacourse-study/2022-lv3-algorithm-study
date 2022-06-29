@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-class Main {
+class Main4796 {
 
     final static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
