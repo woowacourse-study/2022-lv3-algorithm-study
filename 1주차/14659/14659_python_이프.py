@@ -1,5 +1,4 @@
 
-
 answer = 0
 
 size = int(input())
@@ -17,15 +16,12 @@ for i in range(1, size):
     if (current_height < next_height):
         current_height = next_height
         
-        if (answer < count):
-            answer = count
+        answer = max(answer, count)
 
         count = 0
         continue
 
     count += 1
 
-if (answer < count):
-    answer = count
-
+answer = max(answer, count)
 print(answer)
