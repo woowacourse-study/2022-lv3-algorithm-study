@@ -16,19 +16,17 @@ public class Main {
 
         //알고리즘
         int result = 0;
-        for (int i = 0; i < N - 1; i++) {
-            int num1 = picks[i];
-            int cur = 0;
-            for (int j = i + 1; j < N; j++) {
-                int num2 = picks[j];
-                if (num1 > num2) {
-                    cur++;
-                } else {
-                    break;
-                }
+        int curPick = picks[0];
+        int curNum = 0;
+        for (int i = 1; i < N; i++) {
+            int num = picks[i];
+            if (curPick > num) {
+                curNum++;
+                result = Math.max(result, curNum);
+            } else {
+                curPick = num;
+                curNum = 0;
             }
-            result = Math.max(result, cur);
-            i += cur;
         }
 
         System.out.println(result);
