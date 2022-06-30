@@ -14,19 +14,21 @@ public class Main {
             numbers.add(scanner.nextInt());
         }
 
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
-            int count = 0;
-            for (int j = i + 1; j < n; j++) {
-                if (numbers.get(i) < numbers.get(j)) {
-                    break;
-                }
-                
-                count++;
+        int maxMountaintop = numbers.get(0);
+        int killCount = 0;
+        int killMax = Integer.MIN_VALUE;
+        for (int i = 1; i < numbers.size(); i++) {
+            if (maxMountaintop < numbers.get(i)) {
+                maxMountaintop = numbers.get(i);
+                killMax = Math.max(killCount, killMax);
+                killCount = 0;
+                continue;
             }
-            max = Math.max(count, max);
+
+            killCount++;
+            killMax = Math.max(killCount, killMax);
         }
 
-        System.out.println(max);
+        System.out.println(killMax);
     }
 }

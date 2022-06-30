@@ -1,8 +1,11 @@
-import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
 
@@ -13,18 +16,27 @@ public class Main {
 
         List<Member> members = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            Member member = new Member(scanner.nextInt(), scanner.next());
-            members.add(member);
+            members.add(new Member(scanner.nextInt(), scanner.next()));
         }
 
-        members.sort(comparing(Member::getAge));
+        List<LinkedList<Member>> counts = IntStream.rangeClosed(0, 200)
+                .mapToObj(ignored -> new LinkedList<Member>())
+                .collect(toList());
 
-        members.forEach(System.out::println);
+        for (Member member : members) {
+            counts.get(member.getAge()).add(member);
+        }
+
+        for (Queue<Member> count : counts) {
+            while (!count.isEmpty()) {
+                System.out.println(count.poll());
+            }
+        }
     }
 }
 
 class Member {
-    
+
     private final int age;
     private final String name;
 
