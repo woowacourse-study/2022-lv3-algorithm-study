@@ -4,7 +4,7 @@ answer = 0
 # 1
 if n%8 == 1:
     answer = 1
-# 3
+# 2
 elif n%8 == 2 or n%8 == 0:
     answer = 2
 # 3
