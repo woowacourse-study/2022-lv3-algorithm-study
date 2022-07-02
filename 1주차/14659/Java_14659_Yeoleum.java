@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Java_14659_Yeoleum {
+public class Main {
     final static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {

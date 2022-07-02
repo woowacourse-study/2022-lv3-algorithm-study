@@ -3,7 +3,7 @@ import java.util.StringTokenizer;
 
 import static java.lang.Math.min;
 
-public class Java_4796_Yeoleum {
+public class Main {
 
     final static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Java_17362_Yeoleum {
+public class Main {
 
     static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));

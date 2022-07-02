@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Java_10814_Yeoleum {
+public class Main {
 
     final static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
