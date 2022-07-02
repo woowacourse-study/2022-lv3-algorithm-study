@@ -16,12 +16,12 @@ public class Java_10814_Yeoleum {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(r.readLine(), " ");
-            int age = Integer.parseInt(st.nextToken());
+            final int age = Integer.parseInt(st.nextToken());
             String name = st.nextToken();
             users.add(new User(age, name));
         }
 
-        List<User> sortedUsers = users.stream()
+        final List<User> sortedUsers = users.stream()
                 .sorted(Comparator.comparingInt(User::getAge))
                 .collect(Collectors.toList());
 

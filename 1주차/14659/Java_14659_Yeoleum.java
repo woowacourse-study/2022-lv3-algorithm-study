@@ -9,7 +9,7 @@ public class Java_14659_Yeoleum {
     public static void main(String[] args) throws IOException {
         final int n = Integer.parseInt(r.readLine());
 
-        List<Integer> peaks = Arrays.stream(r.readLine().split(" "))
+        final List<Integer> peaks = Arrays.stream(r.readLine().split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 

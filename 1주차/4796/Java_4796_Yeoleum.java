@@ -11,13 +11,15 @@ public class Java_4796_Yeoleum {
         int index = 0;
         while(true) {
             String st = r.readLine();
+
             if(st.equals("0 0 0")){
                 break;
             }
+
             String[] elements = st.split(" ");
-            int l = Integer.parseInt(elements[0]);
-            int p = Integer.parseInt(elements[1]);
-            int v = Integer.parseInt(elements[2]);
+            final int l = Integer.parseInt(elements[0]);
+            final int p = Integer.parseInt(elements[1]);
+            final int v = Integer.parseInt(elements[2]);
 
             int days = (v / p) * l + min(v % p, l);
             index++;
