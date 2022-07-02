@@ -1,13 +1,15 @@
 import sys
 
 n = int(sys.stdin.readline())
+tops = list(map(int, sys.stdin.readline().split()))
 
-if n == 1:
-    print(n)
-else:
-    n -= 2
-    if n // 4 % 2 == 1:
-        result = 4 - (n % 4)
+result = count = max_top = 0
+for top in tops:
+    if top > max_top:
+        count = 0
     else:
-        result = (n % 4) + 2
-    print(result)
+        count += 1
+        result = max(result, count)
+    max_top = max(max_top, top)
+
+print(result)
