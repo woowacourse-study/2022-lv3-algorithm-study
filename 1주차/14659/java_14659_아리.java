@@ -15,20 +15,19 @@ public class Main {
                 .toArray();
 
         int result = 0;
+        int now = 0;
+        int kill = 0;
 
-        for (int i = 0; i < count - 1; i++) {
-            int kill = 0;
-
-            int j = i + 1;
-            while (j < count && arr[j] < arr[i]) {
+        for (int i = 0; i < count; i++) {
+            if (arr[now] > arr[i]) {
                 kill++;
-                j++;
+            } else {
+                result = Math.max(result, kill);
+                now = i;
+                kill = 0;
             }
-
-            result = Math.max(result, kill);
         }
 
-        System.out.println(result);
+        System.out.println(Math.max(result, kill));
     }
-
 }

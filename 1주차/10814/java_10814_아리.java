@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -18,11 +15,14 @@ public class Main {
             list.add(br.readLine());
         }
 
-        Collections.sort(list, Comparator.comparingInt(age -> Integer.parseInt(age.split(" ")[0])));
+        Collections.sort(list, Comparator.comparingInt(input -> Integer.parseInt(new StringTokenizer(input).nextToken(), " ")));
 
+        StringBuilder result = new StringBuilder();
         for (String member : list) {
-            System.out.println(member);
+            result.append(member + "\n");
         }
+
+        System.out.println(result);
     }
 
 }
