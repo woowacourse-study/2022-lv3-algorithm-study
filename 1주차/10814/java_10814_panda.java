@@ -9,23 +9,22 @@ import java.util.StringTokenizer;
 public class java_10814_panda {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int number = Integer.parseInt(br.readLine());
 
         List<Member> members = new LinkedList<>();
-
         for (int i = 0; i < number; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int age = Integer.parseInt(st.nextToken());
             String name = st.nextToken();
             members.add(new Member(age, name));
         }
-
         Collections.sort(members);
 
+        StringBuilder sb = new StringBuilder();
         for (Member member : members) {
-            bw.write(member.getAge() + " " + member.getName() + "/");
+            sb.append(member.getAge()).append(" ").append(member.getName()).append("/");
         }
+        System.out.println(sb);
     }
 }
 
