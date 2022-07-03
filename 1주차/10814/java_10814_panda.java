@@ -1,13 +1,15 @@
 package algorithm_study.week1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.io.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class java_10814_panda {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int number = Integer.parseInt(br.readLine());
 
         List<Member> members = new LinkedList<>();
@@ -22,14 +24,14 @@ public class java_10814_panda {
         Collections.sort(members);
 
         for (Member member : members) {
-            System.out.printf("%d %s\n", member.getAge(), member.getName());
+            bw.write(member.getAge() + " " + member.getName() + "/");
         }
     }
 }
 
 class Member implements Comparable<Member> {
-    private int age;
-    private String name;
+    private final int age;
+    private final String name;
 
     public Member(int age, String name) {
         this.age = age;
@@ -46,6 +48,6 @@ class Member implements Comparable<Member> {
 
     @Override
     public int compareTo(Member o) {
-        return age - o.getAge();
+        return age - o.age;
     }
 }
