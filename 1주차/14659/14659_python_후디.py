@@ -1,3 +1,6 @@
+# 한조서열정리하고옴ㅋㅋ
+# https://www.acmicpc.net/problem/14659
+
 n = int(input())
 attackers = list(map(int, input().split(" ")))
 
@@ -22,7 +25,6 @@ while True:
         attacker_index = target_index
         target_index = attacker_index + 1
 
-    if max_kill_count < kill_count:
-        max_kill_count = kill_count
+    max_kill_count = max(max_kill_count, kill_count)
 
 print(max_kill_count)
