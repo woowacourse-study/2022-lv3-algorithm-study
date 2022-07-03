@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class java_4796_panda {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int caseNumber = 0;
         while (true) {
             String nextLine = br.readLine();
@@ -26,7 +27,8 @@ public class java_4796_panda {
             } else {
                 answer = L * (V / P) + V % P;
             }
-            System.out.printf("Case %d: %d\n", caseNumber, answer);
+            sb.append("Case ").append(caseNumber).append(": ").append(answer).append("\n");
         }
+        System.out.println(sb);
     }
 }
