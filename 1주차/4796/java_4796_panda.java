@@ -21,12 +21,7 @@ public class java_4796_panda {
             int P = Integer.parseInt(st.nextToken());
             int V = Integer.parseInt(st.nextToken());
 
-            int answer;
-            if (V % P >= L) {
-                answer = L * (V / P + 1);
-            } else {
-                answer = L * (V / P) + V % P;
-            }
+            int answer = L * (V / P) + Math.min(L, V % P);
             sb.append("Case ").append(caseNumber).append(": ").append(answer).append("\n");
         }
         System.out.println(sb);
