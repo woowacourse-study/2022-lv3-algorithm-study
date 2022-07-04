@@ -32,6 +32,6 @@ class Main10814 {
     }
 
     private static void sortMembers(List<String> members) {
-        members.sort(Comparator.comparing(member -> member.split(" ")[0]));
+        members.sort(Comparator.comparing(member -> Integer.parseInt(member.split(" ")[0])));
     }
 }
