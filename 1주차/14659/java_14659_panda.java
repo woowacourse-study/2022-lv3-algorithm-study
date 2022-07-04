@@ -29,9 +29,7 @@ public class java_14659_panda {
 
         for (int i = 1; i < number; i++) {
             if (heights[i] > pivot) {
-                if (combo > maxCombo) {
-                    maxCombo = combo;
-                }
+                maxCombo = Math.max(combo, maxCombo);
                 combo = 0;
                 pivot = heights[i];
             } else {
