@@ -1,4 +1,4 @@
-fun main(args: Array<String>) {
+fun main() {
     val n = readln().toInt()
 
     when (n % 8) {

@@ -1,6 +1,6 @@
 import kotlin.math.max
 
-fun main(args: Array<String>) {
+fun main() {
     val n = readln().toInt()
     val archers = readln().split(" ").map { it.toInt() }
     var maxCount = 0
