@@ -10,4 +10,4 @@ while True:
     if V == 0:
         break
     case += 1
-    print(f'Case {case}: {V // P * L + (L if L < V % P else V % P)}')
+    print(f'Case {case}: {V // P * L + min(L, V % P)}')
