@@ -1,59 +1,34 @@
-VICTORY = "Victory!"
-GG = "gg"
+from collections import deque
+
+NICE = "Nice"
+SAD = "Sad"
 
 def solution():
-    global hero_hp, hero_atk, devil_hp, devil_atk
-    global devil_heal_condition, devil_heal_gauge
-    global hero_quotient, hero_remainder, devil_quotient, devil_remainder
 
-    if (hero_quotient < devil_quotient):
-        if (devil_quotient - hero_quotient == 1):
-            if (hero_remainder != 0 and devil_remainder == 0):
-                return VICTORY
-        return GG
+    size = int(input())
 
-    if (devil_remainder <= devil_heal_condition):
-        if (devil_remainder == 0 and devil_heal_condition < hero_atk):
-            return VICTORY
-        return checkWithHeal()
+    queue = deque([int(i) for i in input().split()])
+    stack = []
 
-    if (devil_heal_condition < hero_atk + devil_remainder):
-        return VICTORY
+    moved = [False] * 1001
+    target = 1
 
-    return checkWithHeal()
+    while True:
+        if (target == size):
+            return NICE
 
+        if (moved[target] == False):
+            ticket = queue.popleft()
+            if (ticket != target):
+                stack.append(ticket)
+                moved[ticket] = True
+                continue
 
-def checkWithHeal():
-    global hero_hp, hero_atk, devil_hp, devil_atk
-    global devil_heal_condition, devil_heal_gauge
-    global hero_quotient, hero_remainder, devil_quotient, devil_remainder
+        else:
+            ticket = stack.pop()
+            if (ticket != target):
+                return SAD
 
-    devil_hp += devil_heal_gauge
-    devil_quotient = devil_hp // hero_atk
-    devil_remainder = devil_hp % hero_atk
-
-    if (hero_quotient < devil_quotient):
-        if (devil_quotient - hero_quotient == 1):
-            if (hero_remainder != 0 and devil_remainder == 0):
-                return VICTORY
-
-        return GG
-
-    if (hero_quotient == devil_quotient):
-        if (hero_remainder == 0):
-            if (devil_remainder == 0):
-                return VICTORY
-            return GG
-
-    return VICTORY
-
-
-hero_hp, hero_atk, devil_hp, devil_atk = map(int, input().split())
-devil_heal_condition, devil_heal_gauge = map(int, input().split())
-
-hero_quotient = hero_hp // devil_atk
-hero_remainder = hero_hp % devil_atk
-devil_quotient = devil_hp // hero_atk
-devil_remainder = devil_hp % hero_atk
+        target += 1
 
 print(solution())
