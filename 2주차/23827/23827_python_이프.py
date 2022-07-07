@@ -2,13 +2,8 @@ limit = 1000000007
 
 size = int(input())
 
-numbers = []
-total = 0
-for i in input().split():
-    value = int(i)
-    numbers.append(value)
-    total += value
-    total %= limit
+numbers = list(map(int, input().split()))
+total = sum(numbers) % limit
 
 answer = 0
 for i in range(size-1):
