@@ -18,10 +18,6 @@ public class java_2121_panda {
         int B = Integer.parseInt(st.nextToken());
 
         Map<Integer, List<Integer>> points = new HashMap<>();
-        for (int i = 0; i <= A; i++) {
-            points.put(i, new ArrayList<>());
-        }
-
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
@@ -32,7 +28,6 @@ public class java_2121_panda {
         }
 
         int answer = 0;
-
         for (int x : points.keySet()) {
             if (!points.containsKey(x + A)) {
                 continue;
@@ -44,7 +39,6 @@ public class java_2121_panda {
                 }
             }
         }
-
         System.out.println(answer);
     }
 }
