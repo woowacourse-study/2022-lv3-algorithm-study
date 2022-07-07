@@ -25,13 +25,7 @@ public class java_22941_panda {
 
         long demonDeathCount = (long)Math.ceil((double)demonHP / (double)heroATK);
         long heroDeathCount = (long)Math.ceil((double)heroHP / (double)demonATK);
-
-        String result;
-        if (demonDeathCount > heroDeathCount) {
-            result = "gg";
-        } else {
-            result = "Victory!";
-        }
+        
         System.out.println(demonDeathCount <= heroDeathCount ? "Victory!" : "gg");
     }
 }
