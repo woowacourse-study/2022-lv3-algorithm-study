@@ -1,10 +1,10 @@
 import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.io.InputStreamReader;
-        import java.util.LinkedList;
-        import java.util.Queue;
-        import java.util.Stack;
-        import java.util.StringTokenizer;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -13,33 +13,31 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        Queue<Integer> previousLine = new LinkedList<>();
+        List<Integer> previousLine = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             previousLine.add(Integer.parseInt(st.nextToken()));
         }
 
         Stack<Integer> stack = new Stack<>();
+        boolean isSuccess = true;
         int distributionOrder = 1;
-
-        while (true) {
-            if (!previousLine.isEmpty() && previousLine.peek() == distributionOrder) {
-                previousLine.poll();
+        for (int order : previousLine) {
+            if (distributionOrder == order) {
                 distributionOrder++;
-            } else if (!stack.isEmpty() && stack.peek() == distributionOrder) {
+            } else if (!stack.isEmpty() && stack.peek() < order) {
+                isSuccess = false;
+                break;
+            } else {
+                stack.add(order);
+            }
+
+            while (!stack.isEmpty() && stack.peek() == distributionOrder) {
                 stack.pop();
                 distributionOrder++;
-            } else if (!previousLine.isEmpty()) {
-                int poll = previousLine.poll();
-                stack.add(poll);
-            } else {
-                break;
             }
         }
 
-        if (stack.isEmpty()) {
-            System.out.println("Nice");
-        } else {
-            System.out.println("Sad");
-        }
+        if (isSuccess) System.out.println("Nice");
+        else System.out.println("Sad");
     }
 }
