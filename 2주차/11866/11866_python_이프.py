@@ -7,7 +7,7 @@ queue = deque([str(i) for i in range(1, size+1)])
 answer = []
 
 try:
-    while size:
+    while True:
         for i in range(step-1):
             queue.append(queue.popleft())
         answer.append(queue.popleft())
