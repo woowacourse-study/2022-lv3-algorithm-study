@@ -32,6 +32,6 @@ public class java_22941_panda {
         } else {
             result = "Victory!";
         }
-        System.out.println(result);
+        System.out.println(demonDeathCount <= heroDeathCount ? "Victory!" : "gg");
     }
 }
