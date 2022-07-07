@@ -19,7 +19,8 @@ public class java_22941_panda {
         long P = Integer.parseInt(st.nextToken());
         long S = Integer.parseInt(st.nextToken());
 
-        if ((demonHP - P) % heroATK == 0 || (demonHP - P) % heroATK + P > heroATK) {
+        long residue = (demonHP - P) % heroATK;
+        if (residue == 0 || residue + P > heroATK) {
             demonHP += S;
         }
 
