@@ -11,18 +11,14 @@ public class java_23827_panda {
         int N = Integer.parseInt(br.readLine());
 
         long sum = 0;
-        long divide = 1_000_000_007;
-        long minus = 0;
-
+        long answer = 0;
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
             long number = Integer.parseInt(st.nextToken());
+            answer += sum * number;
+            answer %= 1_000_000_007;
             sum += number;
-            minus = (minus + number * sum) % divide;
         }
-        sum %= divide;
-        long answer = sum * sum - minus;
-
-        System.out.println(answer % divide);
+        System.out.println(answer);
     }
 }
