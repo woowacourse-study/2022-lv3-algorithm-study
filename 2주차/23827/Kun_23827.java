@@ -22,9 +22,9 @@ public class Kun_23827 {
         long result = 0;
         for (int i = 0; i < ar.length - 1; i++) {
             sum -= ar[i];
-            result = (result + sum * ar[i]) % 1000000007;
+            result += sum * ar[i] % 1000000007;
         }
 
-        System.out.println(result);
+        System.out.println(result % 1000000007);
     }
 }
