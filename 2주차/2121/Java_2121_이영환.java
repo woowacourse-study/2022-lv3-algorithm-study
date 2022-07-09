@@ -27,7 +27,12 @@ public class Main {
             points.add(new Point(x, y));
         }
 
+        System.out.println(calculateMakeableSquareCount(squareHorizontalSize, squareVerticalSize, points));
+    }
 
+    private static int calculateMakeableSquareCount(final int squareHorizontalSize,
+                                                    final int squareVerticalSize,
+                                                    final Set<Point> points) {
         int makeableSquareCount = 0;
         for (Point point : points) {
             if (!points.contains(point.addX(squareHorizontalSize))) {
@@ -44,8 +49,7 @@ public class Main {
 
             makeableSquareCount++;
         }
-
-        System.out.println(makeableSquareCount);
+        return makeableSquareCount;
     }
 
     static class Point {

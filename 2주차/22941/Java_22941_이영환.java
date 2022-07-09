@@ -9,11 +9,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final String[] firstInput = bf.readLine().split("\\s+");
         final String[] secondInput = bf.readLine().split("\\s+");
-        final Fighter theBrave = TheBrave.of(firstInput[0], firstInput[1]);
-        final Fighter kingOfSuwon = KingOfSuwon.of(firstInput[2], firstInput[3], secondInput[0], secondInput[1]);
+        final Fighter theBrave = TheBrave.of(firstInput[0], firstInput[1], "Victory!");
+        final Fighter kingOfSuwon = KingOfSuwon.of(
+                firstInput[2],
+                firstInput[3],
+                "gg",
+                secondInput[0],
+                secondInput[1]
+        );
 
-        final Match match
-                = new Match(theBrave, kingOfSuwon, "Victory!", "gg");
+        final Match match = new Match(theBrave, kingOfSuwon);
 
         System.out.println(match.getWinnerMessage());
     }
@@ -22,17 +27,10 @@ public class Main {
 
         private final Fighter firstStriker;
         private final Fighter secondStriker;
-        private final String firstStrikerWinningMessage;
-        private final String secondStrikerWinningMessage;
 
-        public Match(final Fighter firstStriker,
-                     final Fighter secondStriker,
-                     final String firstStrikerWinningMessage,
-                     final String secondStrikerWinningMessage) {
+        public Match(final Fighter firstStriker, final Fighter secondStriker) {
             this.firstStriker = firstStriker;
             this.secondStriker = secondStriker;
-            this.firstStrikerWinningMessage = firstStrikerWinningMessage;
-            this.secondStrikerWinningMessage = secondStrikerWinningMessage;
         }
 
         public String getWinnerMessage() {
@@ -40,41 +38,51 @@ public class Main {
             final long secondHitCut = secondStriker.calculateHitCut(firstStriker.getAtk());
 
             if (firstHitCut >= secondHitCut) {
-                return firstStrikerWinningMessage;
+                return firstStriker.getWinningMessage();
             }
-            return secondStrikerWinningMessage;
+            return secondStriker.getWinningMessage();
         }
     }
 
     interface Fighter {
         long calculateHitCut(final long enemyAtk);
+
         long getAtk();
+
+        String getWinningMessage();
     }
 
     static abstract class AbstractFighter implements Fighter {
 
         protected final long hp;
         protected final long atk;
+        protected final String winningMessage;
 
-        public AbstractFighter(final long hp, final long atk) {
+        public AbstractFighter(final long hp, final long atk, final String winningMessage) {
             this.hp = hp;
             this.atk = atk;
+            this.winningMessage = winningMessage;
         }
 
         @Override
         public long getAtk() {
             return atk;
         }
+
+        @Override
+        public String getWinningMessage() {
+            return winningMessage;
+        }
     }
 
-    static class TheBrave extends AbstractFighter{
+    static class TheBrave extends AbstractFighter {
 
-        public TheBrave(final long hp, final long atk) {
-            super(hp, atk);
+        public TheBrave(final long hp, final long atk, final String winningMessage) {
+            super(hp, atk, winningMessage);
         }
 
-        public static TheBrave of(final String rawHp, final String rawAtk) {
-            return new TheBrave(Long.parseLong(rawHp), Long.parseLong(rawAtk));
+        public static TheBrave of(final String rawHp, final String rawAtk, final String winningMessage) {
+            return new TheBrave(Long.parseLong(rawHp), Long.parseLong(rawAtk), winningMessage);
         }
 
         @Override
@@ -91,20 +99,23 @@ public class Main {
         private final long recoverHp;
         private final long recoverAmount;
 
-        public KingOfSuwon(final long hp, final long atk, final long recoverHp, final long recoverAmount) {
-            super(hp, atk);
+        public KingOfSuwon(final long hp, final long atk, final String winningMessage, final long recoverHp,
+                           final long recoverAmount) {
+            super(hp, atk, winningMessage);
             this.recoverHp = recoverHp;
             this.recoverAmount = recoverAmount;
         }
 
         public static KingOfSuwon of(final String rawHp,
                                      final String rawAtk,
+                                     final String winningMessage,
                                      final String rawRecoverHp,
                                      final String rawRecoverAmount) {
 
             return new KingOfSuwon(
                     Long.parseLong(rawHp),
                     Long.parseLong(rawAtk),
+                    winningMessage,
                     Long.parseLong(rawRecoverHp),
                     Long.parseLong(rawRecoverAmount)
             );
