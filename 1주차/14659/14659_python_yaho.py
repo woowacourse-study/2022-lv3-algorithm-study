@@ -1,18 +1,16 @@
 import sys
+readline = sys.stdin.readline()
 
-n = int(sys.stdin.readline())
-heights = list(map(int, sys.stdin.readline().strip().split()))
+n = int(readline())
+heights = list(map(int, readline().strip().split()))
 
-tmp = 0
-for i in range(n-1):
-    if tmp == n - i:
-        break
-    now = heights[i]
-    cnt = 0
-    for j in range(i+1, n):
-        if heights[j] <= now:
-            break
-        cnt += 1
-    tmp = max(tmp, cnt)
+result, count, max_height = 0
+for height in heights:
+    if height > max_height:
+        max_height = height
+        count = 0
+    else:
+        count += 1
+        result = max(result, count)
 
-print(tmp)
+print(result)

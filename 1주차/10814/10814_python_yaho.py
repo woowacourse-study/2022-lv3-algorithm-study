@@ -1,14 +1,11 @@
 from operator import itemgetter
 import sys
+readline = sys.stdin.readline
 
-n = int(sys.stdin.readline())
-members = []
+n = int(readline())
+members = [readline() for _ in range(n)]
 
-for i in range(n):
-    age, name = map(str, sys.stdin.readline().split())
-    members.append((int(age), name))
-
-members.sort(key=itemgetter(0))
+members.sort(key=int(itemgetter(0)))
 
 for member in members:
     print(member[0], member[1])
