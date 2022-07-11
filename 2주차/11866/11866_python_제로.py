@@ -8,13 +8,11 @@ count = 0
 answer = [lst[current]]
 visited[current] = True
 
-while True:
-    if len(answer) == n:
-        break
+while len(answer) != n:
     current += 1
     if current >= n:
         current = n - current
-    if visited[current] == False:
+    if not visited[current]:
         count += 1
     if count == k:
         answer.append(lst[current])
