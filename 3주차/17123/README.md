@@ -1,2 +1,2 @@
-### RPG 마스터 오명진
+### 배열 놀이
 https://www.acmicpc.net/problem/17123
