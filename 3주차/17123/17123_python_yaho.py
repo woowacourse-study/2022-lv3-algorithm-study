@@ -12,10 +12,10 @@ for _ in range(t):
 
     for _ in range(m):
         r1, c1, r2, c2, v = map(int, readline().split())
-        for r in range(r1-1, r2):
-            li_r[r] += (c2-c1+1) * v
-        for c in range(c1-1, c2):
-            li_c[c] += (r2-r1+1) * v
+        for r in range(r1 - 1, r2):
+            li_r[r] += (c2 - c1 + 1) * v
+        for c in range(c1 - 1, c2):
+            li_c[c] += (r2 - r1 + 1) * v
 
     print(*li_c)
     print(*li_r)

@@ -10,10 +10,10 @@ cnt = 0
 result = max(li)
 
 while cnt != k:
-    share = [li[i]//result for i in range(n)]
+    share = [li[i] // result for i in range(n)]
     cnt = sum(share)
     if cnt == k:
         break
-    result = max([li[i]//(share[i]+1) for i in range(n)])
+    result = max([li[i] // (share[i] + 1) for i in range(n)])
 
 print(result)
