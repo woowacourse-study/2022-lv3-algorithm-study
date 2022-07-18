@@ -6,20 +6,11 @@ readline = sys.stdin.readline
 
 t = int(readline())
 
-
-def init_sum_of_cols(arr):
-    sum_of_cols = [0] * n
-    for row in arr:
-        for i in range(n):
-            sum_of_cols[i] += row[i]
-    return sum_of_cols
-
-
 for _ in range(t):
     n, m = map(int, readline().split())
     arr = [list(map(int, readline().split())) for _ in range(n)]
     sum_of_rows = [sum(row) for row in arr]
-    sum_of_cols = init_sum_of_cols(arr)
+    sum_of_cols = [sum([arr[row][col] for col in range(n)]) for row in range(n)]
 
     for _ in range(m):
         r1, c1, r2, c2, v = map(int, readline().split())

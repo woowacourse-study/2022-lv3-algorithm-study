@@ -10,7 +10,7 @@ def isPalindrom(s, palindrom):
     return True
 
 
-s = sys.stdin.readline().strip()
+s = sys.stdin.readline().rstrip()
 palindrom = s
 for length in range(0, len(s)):
     if isPalindrom(s, palindrom):
