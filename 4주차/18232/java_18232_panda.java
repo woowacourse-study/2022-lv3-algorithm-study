@@ -49,7 +49,7 @@ public class java_18232_panda {
             int departure = current.get(0);
             int timeSpent = current.get(1) + 1;
 
-            Set<Integer> nextSpots = teleport.computeIfAbsent(departure, k -> new HashSet<>());
+            Set<Integer> nextSpots = teleport.getOrDefault(departure, new HashSet<>());
             Stream.of(departure - 1, departure + 1)
                 .filter(x -> x > 0 && x <= N)
                 .forEach(nextSpots::add);
