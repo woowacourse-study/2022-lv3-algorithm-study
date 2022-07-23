@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-// DFS 시간 초과
 public class Main {
 
     /*
@@ -13,15 +12,12 @@ public class Main {
      * E: 도착 위치
      */
     private static int N, M, S, E;
-    private static final Map<Integer, Set<Integer>> teleports = new HashMap<>();
     private static boolean[] visited;
-    private static int min;
+    private static final Map<Integer, Set<Integer>> teleports = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         input();
-        visited[S] = true;
-        calculate(0, S);
-        System.out.println(min);
+        System.out.println(calculate());
     }
 
     private static void input() throws IOException {
@@ -29,7 +25,6 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        min = N;
         visited = new boolean[N + 1];
 
         st = new StringTokenizer(br.readLine());
@@ -40,43 +35,44 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
-            putValue(x, y);
-            putValue(y, x);
+            teleports.computeIfAbsent(x, it -> new HashSet<>()).add(y);
+            teleports.computeIfAbsent(y, it -> new HashSet<>()).add(x);
         }
 
         br.close();
     }
 
-    private static void putValue(int x, int y) {
-        Set<Integer> value = teleports.getOrDefault(x, new HashSet<>());
-        value.add(y);
-        teleports.put(x, value);
-    }
+    private static int calculate() {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{S, 0});
 
-    private static void calculate(int sum, int now) {
-        if (now == E) {
-            min = Math.min(min, sum);
-            return;
-        }
+        while (!q.isEmpty()) {
+            int[] now = q.poll();
+            for (int link : findLinks(now[0])) {
+                if (visited[link]) {
+                    continue;
+                }
 
-        if (now - 1 > 0 && !visited[now - 1]) {
-            visited[now - 1] = true;
-            calculate(sum + 1, now - 1);
-            visited[now - 1] = false;
-        }
+                if (link == E) {
+                    return now[1] + 1;
+                }
 
-        if (now + 1 <= N && !visited[now + 1]) {
-            visited[now + 1] = true;
-            calculate(sum + 1, now + 1);
-            visited[now + 1] = false;
-        }
-
-        for (int n : teleports.getOrDefault(now, new HashSet<>())) {
-            if (!visited[n]) {
-                visited[n] = true;
-                calculate(sum + 1, n);
-                visited[n] = false;
+                visited[link] = true;
+                q.add(new int[]{link, now[1] + 1});
             }
         }
+
+        return 0;
+    }
+
+    private static Set<Integer> findLinks(int now) {
+        Set<Integer> links = teleports.getOrDefault(now, new HashSet<>());
+        if (now - 1 > 0) {
+            links.add(now - 1);
+        }
+        if (now + 1 <= N) {
+            links.add(now + 1);
+        }
+        return links;
     }
 }
