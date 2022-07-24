@@ -2,9 +2,11 @@ import sys
 
 input = sys.stdin.readline
 
+sys.setrecursionlimit(10**6)
+
 
 def pop(i, j):
-    if i < 0 or j < 0 or i >= M or j >= N:
+    if i < 0 or j < 0 or i >= N or j >= M:
         return
 
     if new_display[i][j]:
@@ -27,13 +29,13 @@ def solution(T, display):
     answer = 0
     for j in range(N):
         for i in range(M):
-            if new_display[i][j]:
+            if new_display[j][i]:
                 answer += 1
-                pop(i, j)
+                pop(j, i)
     return answer
 
 
-M, N = map(int, input().split())
+N, M = map(int, input().split())
 new_display = [[] for _ in range(N)]
 display = []
 for _ in range(N):
