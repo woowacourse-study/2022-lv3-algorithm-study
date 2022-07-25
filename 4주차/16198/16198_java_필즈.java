@@ -1,3 +1,5 @@
+package study.coding.test.backjoon.week_4.p_2_16198;
+
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.max;
 
@@ -7,16 +9,15 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 
-class P {
+class Main {
 
     /**
-     * fail
+     * pass
      */
-
     public static void main(String[] args) {
-        final P p = new P();
+        final Main main = new Main();
         final Reader reader = new InputStreamReader(System.in);
-        String output = p.solve(reader);
+        String output = main.solve(reader);
         System.out.println(output);
         close(reader);
     }
@@ -32,47 +33,49 @@ class P {
         }
 
         // dfs
-        int max = Integer.MIN_VALUE;
+        int maxVal = Integer.MIN_VALUE;
         for (int i = 1; i < nums.length - 1; i++) {
-            max = max(max, dfs(nums, i, 0));
+            maxVal = max(maxVal, dfs(nums, i, 0));
         }
 
-        return max + "";
+        return maxVal + "";
     }
 
     private int dfs(final int[] nums, final int index, int sum) {
 
+/*
         System.out.println("nums = " + Arrays.toString(nums));
         System.out.println("index = " + index);
         System.out.println("sum = " + sum);
+*/
 
-        if (nums.length == 2 || (index == 0 || index >= nums.length - 1)) {
+        final int energy = nums[index - 1] * nums[index + 1];
+        sum += energy;
+        final int[] subArr = cherryKill(nums, index);
+
+        int maxVal = Integer.MIN_VALUE;
+        for (int j = 1; j < subArr.length - 1; j++) {
+            maxVal = max(maxVal, dfs(subArr, j, sum));
+        }
+
+        if (subArr.length == 2) {
             return sum;
         }
 
-        sum += nums[index - 1] * nums[index + 1];
-
-        for (int i = 1; i < nums.length - 1; i++) {
-            final int[] cherryKill = cherryKill(nums, i);
-            for (int j = 0; j < cherryKill.length; j++) {
-                sum = max(sum, dfs(cherryKill, j, sum));
-            }
-        }
-
-        return sum;
+        return maxVal;
     }
 
     private static int[] cherryKill(final int[] arr, final int index) {
-        final int[] copyArr = Arrays.copyOfRange(arr, 0, index);
-        final int[] copyArr2 = Arrays.copyOfRange(arr, index + 1, arr.length);
+        final int[] deepCopyLeft = Arrays.copyOfRange(arr, 0, index);
+        final int[] deepCopyRight = Arrays.copyOfRange(arr, index + 1, arr.length);
 
-        final int[] result = concatArray(copyArr, copyArr2);
+        final int[] result = concatArray(deepCopyLeft, deepCopyRight);
         return result;
     }
 
-    private static int[] concatArray(final int[] copyArr, final int[] copyArr2) {
-        final int[] result = Arrays.copyOf(copyArr, copyArr.length + copyArr2.length);
-        System.arraycopy(copyArr2, 0, result, copyArr.length, copyArr2.length);
+    private static int[] concatArray(final int[] deepCopyLeft, final int[] deepCopyRight) {
+        final int[] result = Arrays.copyOf(deepCopyLeft, deepCopyLeft.length + deepCopyRight.length);
+        System.arraycopy(deepCopyRight, 0, result, deepCopyLeft.length, deepCopyRight.length);
         return result;
     }
 
