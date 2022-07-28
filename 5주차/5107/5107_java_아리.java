@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -41,31 +40,26 @@ public class Main {
                 // 방문하지 않았다면 dfs 시작
                 if (!visited[i]) {
 
-                    Stack<Integer> stack = new Stack<>();
-                    stack.push(i);
                     visited[i] = true;
+                    String startOfCircle = keys.get(i); // 연결고리 시작점
 
-                    // 연결고리 시작점
-                    String startOfCircle = keys.get(i);
+                    String source = manito.get(startOfCircle);
+                    int indexOfSource = keys.indexOf(source);
 
-                    while (!stack.isEmpty()) {
-                        int sourceIndex = stack.pop();
-                        String target = manito.get(keys.get(sourceIndex));
-                        int targetIndex = keys.indexOf(target);
+                    while (!visited[indexOfSource]) {
 
-                        // 방문하지 않았다면 방문 처리
-                        if (!visited[targetIndex]) {
-                            visited[targetIndex] = true;
-                        }
+                        String target = manito.get(source);
+                        int indexOfTarget = keys.indexOf(target);
 
-                        // 연결고리 완성이라면 그대로 끝!
+                        // 연결고리 완성!
                         if (startOfCircle.equals(target)) {
                             result++;
                             break;
                         }
 
-                        // 연결고리 아니라면 다음 진행을 위해 스택에 넣기
-                        stack.push(targetIndex);
+                        // 아니라면 계속하기
+                        source = target;
+                        indexOfSource = indexOfTarget;
                     }
 
                 }
