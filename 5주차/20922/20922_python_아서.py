@@ -17,4 +17,5 @@ while rt < n:
     else:
         check[seq[lt]] -= 1
         lt += 1
-    res = max()
+        res = max(res, rt - lt)
+print(res)
