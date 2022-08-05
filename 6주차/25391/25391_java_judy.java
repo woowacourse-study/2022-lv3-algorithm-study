@@ -45,7 +45,7 @@ public class 특별상 {
         for (int i = 0; i < k; i++) {
             students.add(orderByReferee.poll());
         }
-        PriorityQueue<Student> orderByOrganizer = new PriorityQueue<>(orderByReferee.size(), (o1, o2) -> {
+        PriorityQueue<Student> orderByOrganizer = new PriorityQueue<>((o1, o2) -> {
             if (o1.organizer > o2.organizer) {
                 return -1;
             }
@@ -54,10 +54,6 @@ public class 특별상 {
         orderByOrganizer.addAll(orderByReferee);
         for (int i = 0; i < m; i++) {
             Student student = orderByOrganizer.poll();
-            if (students.contains(student)) {
-                i--;
-                continue;
-            }
             students.add(student);
         }
         int sum = students.stream().mapToInt(student -> student.organizer).sum();
