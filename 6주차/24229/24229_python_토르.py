@@ -5,31 +5,34 @@ from collections import defaultdict
 import heapq
 
 N = int(input())
-boards = []
-for _ in range(N):
-    board = list(map(int, input().split()))
-    boards.append(board)
+roads = []
 
-boards.sort()
-last_jump = 0
+for _ in range(N):
+    roads.append(tuple(map(int, input().split())))
+
+roads.sort()
+last_l, last_r = 0, 0
+max_index = 0
 answer = 0
 
-for i in range(0, len(boards) -1):
-    # 이후와 연결되는 경우
-    if boards[i][1] >= boards[i+1][0]:
-        continue
-    # 이후와 연결되지 않는 경우
+for l, r in roads:
+    # 이전과 겹치는 경우
+    if l <= last_r:
+        # 완전히 이전것과 겹치는 경우
+        if r <= last_r:
+            continue
+        # 현재 오른쪽이 더 길기는 한 경우
+        max_index = max(max_index, 2 * r - last_l)
+    # 이전과 겹치지 않는 경우
     else:
-        run_distance = boards[i][1] - last_jump
-        # 점프할 수 있는 경우
-        if boards[i][1] + run_distance >= boards[i+1][0]:
-            last_jump = boards[i+1][0]
-        # 없는 경우
-        else:
-            print(f"last_jump, {last_jump}")
-            print(f"cur_point, {boards[i][1]}")
-            answer = boards[i][1]
+        # 이전에 점프해서 도달하지 못하는 경우
+        if max_index < l:
             break
+        # 이전에 점프해서 도달할 수 있는 경우
+        max_index = max(max_index, 2 * r - l)
+        last_l = l
+
+    last_r = r
+    answer = max(r, answer)
 
 print(answer)
-print(boards)
