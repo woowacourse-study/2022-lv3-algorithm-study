@@ -5,10 +5,13 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
+
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static String input() {
@@ -21,24 +24,18 @@ public class Main {
 
     public static void main(String[] args) {
         int n = Integer.parseInt(input());
-        List<Integer> energies = Arrays.stream(input().split(" "))
-                .map(Integer :: parseInt)
-                .collect(Collectors.toList());
 
-        int answer = solve(energies);
-        System.out.println(answer);
-    }
-
-    private static int solve(List<Integer> energies) {
-        int answer = 0;
-        for (int i = 1; i < energies.size()-1; i++) {
-            int currentEnergy = energies.get(i-1) * energies.get(i+1);
-            List<Integer> copied = new ArrayList<>(energies);
-            copied.remove(i);
-            answer = Math.max(answer, currentEnergy + solve(copied));
+        Deque<Integer> deque = new ArrayDeque<>();
+        long answer = 0;
+        for (int i = 0; i < n; i++) {
+            int height = Integer.parseInt(input());
+            while (!deque.isEmpty() && deque.peekFirst() <= height) {
+                deque.pollFirst();
+            }
+            answer += deque.size();
+            deque.offerFirst(height);
         }
 
-        return answer;
+        System.out.println(answer);
     }
 }
-
