@@ -12,6 +12,7 @@ graph = [[] for _ in range(n)]
 
 answer = 0
 
+
 def dijkstra(start_node):
     global answer
     distances = [sys.maxsize] * len(items)
