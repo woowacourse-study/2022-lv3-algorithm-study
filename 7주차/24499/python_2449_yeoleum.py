@@ -4,7 +4,7 @@ n,k = map(int,sys.stdin.readline().split())
 pies = list(map(int,sys.stdin.readline().split())) * 2
 
 left = 0
-right =  - 1
+right = k - 1
 sum = 0
 
 for i in range(k):
