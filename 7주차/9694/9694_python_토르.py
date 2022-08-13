@@ -30,11 +30,11 @@ for test_number in range(T):
             for adj_cost, adj_node in graph[cur_pos]:
                 if cur_cost + adj_cost < distances[adj_node][0]:
                     distances[adj_node][0] = cur_cost + adj_cost
-                    distances[adj_node][1] = cur_history + str(adj_node)
-                    heapq.heappush(heap, (cur_cost + adj_cost, adj_node, cur_history + str(adj_node)))
+                    distances[adj_node][1] = cur_history + " " + str(adj_node)
+                    heapq.heappush(heap, (cur_cost + adj_cost, adj_node, cur_history + " " + str(adj_node)))
 
         if distances[M-1][0] != sys.maxsize:
-            return " ".join(map(str, distances[M-1][1]))
+            return distances[M-1][1]
         return -1
 
     print(f"Case #{test_number+1}: {dijkstra(0, '')}")
