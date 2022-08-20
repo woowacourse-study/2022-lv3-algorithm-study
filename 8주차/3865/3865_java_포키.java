@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -13,6 +12,7 @@ import java.util.StringTokenizer;
 public class Main {
 
     private static Map<String, Set<String>> groups;
+    private static Set<String> counted;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,36 +24,40 @@ public class Main {
 
         while(numberOfGroups != 0) {
             groups = new HashMap<>();
+            counted = new HashSet<>();
             for (int i = 0; i < numberOfGroups; i++) {
-                st = new StringTokenizer(br.readLine(), ":");
+                st = new StringTokenizer(br.readLine(), ":,.");
 
                 final String groupName = st.nextToken();
                 if (i == 0) {
                     firstGroupName = groupName;
                 }
-                groups.put(groupName, new HashSet<>());
 
-                String rawParticipants = st.nextToken().replace(".", "");
-                final String[] splitedParticipants = rawParticipants.split(",");
-                groups.get(groupName).addAll(List.of(splitedParticipants));
+                groups.put(groupName, new HashSet<>());
+                while(st.hasMoreTokens()) {
+                    groups.get(groupName).add(st.nextToken());
+                }
             }
 
-            final Set<String> participants = getParticipants(firstGroupName);
-            bw.write(participants.size() + "\n");
+            final int count = countParticipants(firstGroupName);
+            bw.write(count + "\n");
             numberOfGroups = Integer.parseInt(br.readLine());
         }
         bw.flush();
     }
 
-    private static Set<String> getParticipants(final String groupName) {
-        final Set<String> participants = new HashSet<>();
+    private static int countParticipants(final String groupName) {
+        int count = 0;
         for (String participant : groups.get(groupName)) {
-            if (groups.containsKey(participant)) {
-                participants.addAll(getParticipants(participant));
+            if (counted.contains(participant)) {
+                continue;
+            } else if (groups.containsKey(participant)) {
+                count += countParticipants(participant);
             } else {
-                participants.add(participant);
+                count++;
             }
+            counted.add(participant);
         }
-        return participants;
+        return count;
     }
 }
