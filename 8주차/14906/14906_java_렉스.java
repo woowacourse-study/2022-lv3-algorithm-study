@@ -52,7 +52,6 @@ public class Main {
     }
 
     private static boolean isSlump(String str) {
-//        return str.matches("^[DE]F+[DEFG]*G$");
         if (str.length() < 3) {
             return false;
         }
