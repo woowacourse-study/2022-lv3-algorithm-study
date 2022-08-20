@@ -30,10 +30,3 @@ while True:
         continue
     break
 print(min(res))
-
-# res = 100000000
-# for i in range(len_a):
-#     for j in range(len_b):
-#         for k in range(len_c):
-#             res = min(res, calculate_pen(a[i], b[j], c[k]))
-# print(res)
