@@ -1,22 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 public class Main {
-
-    static class Node {
-        int number, count;
-
-        public Node(int number, int count) {
-            this.number = number;
-            this.count = count;
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,43 +14,50 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             count[i] = Integer.parseInt(st.nextToken());
         }
-        Map<Integer, Integer> numberCounts = new TreeMap<>();
+        Map<Integer, Integer>[] players = new TreeMap[3];
         for (int i = 0; i < 3; i++) {
+            players[i] = new TreeMap<>();
             st = new StringTokenizer(br.readLine());
-            Set<Integer> playerPick = new HashSet<>();
             for (int j = 0; j < count[i]; j++) {
                 int key = Integer.parseInt(st.nextToken());
-                if (playerPick.contains(key)) {
-                    continue;
-                }
-                playerPick.add(key);
-                if (numberCounts.containsKey(key)) {
-                    numberCounts.compute(key, (k, v) -> v + 1);
+                if (players[i].containsKey(key)) {
+                    players[i].compute(key, (k, v) -> v + 1);
                 } else {
-                    numberCounts.put(key, 1);
+                    players[i].put(key, 1);
                 }
             }
-        }
-        Node[] numbers = new Node[numberCounts.size()];
-        int index = 0;
-        for (Integer number : numberCounts.keySet()) {
-            numbers[index++] = new Node(number, numberCounts.get(number));
         }
         int answer = Integer.MAX_VALUE;
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i].count == 3) {
-                answer = 0;
-                break;
-            }
-            if (numbers[i].count == 2 && i + 1 < numbers.length) {
-                answer = Math.min(answer, Math.abs(numbers[i + 1].number - numbers[i].number));
-            }
-            if (i + 1 < numbers.length && numbers[i + 1].count == 2) {
-                answer = Math.min(answer, Math.abs(numbers[i + 1].number - numbers[i].number));
-            } else if (i + 2 < numbers.length) {
-                answer = Math.min(answer, Math.abs(numbers[i + 2].number - numbers[i].number));
+        while (canPlay(players)) {
+            int num1 = getFirstNumber(players[0]);
+            int num2 = getFirstNumber(players[1]);
+            int num3 = getFirstNumber(players[2]);
+
+            int max = Math.max(Math.max(num1, num2), num3);
+            int min = Math.min(Math.min(num1, num2), num3);
+
+            answer = Math.min(answer, Math.abs(max - min));
+
+            for (int i = 0; i < 3; i++) {
+                if (players[i].containsKey(min)) {
+                    if (players[i].get(min) == 1) {
+                        players[i].remove(min);
+                    } else {
+                        players[i].compute(min, (k, v) -> v - 1);
+                    }
+                }
             }
         }
         System.out.println(answer);
+    }
+
+    private static boolean canPlay(Map<Integer, Integer>[] players) {
+        return !players[0].isEmpty() && !players[1].isEmpty() && !players[2].isEmpty();
+    }
+
+    private static Integer getFirstNumber(Map<Integer, Integer> player) {
+        return player.keySet().stream()
+            .findFirst()
+            .get();
     }
 }
