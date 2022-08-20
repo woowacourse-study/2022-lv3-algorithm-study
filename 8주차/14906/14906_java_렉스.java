@@ -23,7 +23,7 @@ public class Main {
         System.out.println(sb);
     }
 
-    public static boolean isSlurpy(String str) {
+    private static boolean isSlurpy(String str) {
         int divisionPoint = str.lastIndexOf('C');
         if (divisionPoint == -1) {
             divisionPoint = str.lastIndexOf('H');
@@ -34,7 +34,7 @@ public class Main {
         return isSlimp(str.substring(0, divisionPoint + 1)) && isSlump(str.substring(divisionPoint + 1));
     }
 
-    public static boolean isSlimp(String str) {
+    private static boolean isSlimp(String str) {
         if (str.length() < 2) { // 길이 2 이하면 탈락
             return false;
         }
@@ -69,7 +69,7 @@ public class Main {
         while (positionF < str.length() && str.charAt(positionF) == 'F') {
             positionF++;
         }
-        if (positionF == str.length() - 1) {
+        if (positionF == str.length() - 1) { // 내부적으로 추가적인 슬럼프가 없으면 True 반환
             return true;
         }
         return isSlump(str.substring(positionF));
